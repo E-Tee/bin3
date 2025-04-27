@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/normalize.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/adapitiive.css">
+
+    <title>b in Site</title>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const radioButtons = document.querySelectorAll('input[name="slider"]');
+            const slides = document.querySelectorAll('.slide');
+            const labels = document.querySelectorAll('.slider__control');
+            const slideIds = ['layout', 'seo', 'design', 'admin'];
+            let currentSlide = 0;
+            let autoSlideInterval;
+
+            function showNextSlide() {
+                currentSlide = (currentSlide + 1) % slideIds.length;
+                document.getElementById(slideIds[currentSlide]).checked = true;
+            }
+
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(showNextSlide, 50000);
+            }
+
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval);
+                startAutoSlide();
+            }
+
+            // Инициализация автоматического переключения
+            startAutoSlide();
+
+            // Обработчики для ручного переключения
+            labels.forEach(label => {
+                label.addEventListener('click', function () {
+                    currentSlide = Array.from(labels).indexOf(this);
+                    resetAutoSlide();
+                });
+            });
+
+            // Остановка при наведении мыши
+            const sliderContainer = document.querySelector('.hero__slider__container');
+            sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            sliderContainer.addEventListener('mouseleave', startAutoSlide);
+        });
+    </script>
+
+</head>
+
+<header class="header">
+    <div class="container">
+        <div class="header__content flex">
+            <div class="header__logo">
+                <a href="#home"><img src="IMG/svg/logo_white.svg" alt=""></a>
+            </div>
+
+            <!-- Бургер-кнопка -->
+            <div class="burger">
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+                <div class="burger-line"></div>
+            </div>
+
+            <ul class="header__nav__list nav-menu flex list--reset">
+                <li class="nav__item">
+                    <a href="#about">
+                        Be in site
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#services">
+                        Услуги
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#portfolio">
+                        Наши работы
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#blog">
+                        Полезности
+                    </a>
+                </li>
+
+                <li class="nav__item">
+                    <a href="#contacts">
+                        Контакты
+                    </a>
+                </li>
+
+            </ul>
+            <!--
+            <div class="header__phone flex">
+                <a href="tel:+79633231571" class="header__phone-link">
+                    +7(963)3231571
+                </a>
+            </div>
+-->
+
+        </div>
+    </div>
+</header>
+
+
+<body>
+
+    <main>
+
+        <!-- Hero  incl. slider (CSS)-->
+
+        <section class="hero" id="hero">
+
+            <!-- Контейнер для частиц 
+            <div id="particles-js" class="hero__particles"></div>
+-->
+            <canvas id="particle-canvas"></canvas>
+            <div class="hero__content flex bg-animation">
+
+                <!--слайдер-->
+                <div class="hero__slider__container flex">
+
+                    <!--инпут не отображается-->
+                    <input type="radio" name="slider" id="layout" checked>
+                    <input type="radio" name="slider" id="seo">
+                    <input type="radio" name="slider" id="design">
+                    <input type="radio" name="slider" id="admin">
+
+                    <!--точки-->
+                    <div class="slider__control__wrapper">
+
+                        <label for="layout" aria-checked="true" class="slider__control"></label>
+                        <label for="seo" class="slider__control"></label>
+                        <label for="design" class="slider__control"></label>
+                        <label for="admin" class="slider__control"></label>
+
+                    </div>
+
+                    <!--слайды-->
+                    <div class="hero__slides__wrapper flex"><!--обёртка для слайдов-->
+
+
+                        <!--слайд разработка сайта-->
+                        <div class="slide flex">
+                            <div class="container">
+                                <h2 class="hero__slide__title">
+                                    Разработка сайта
+                                </h2>
+                                <div class="hero__slide__descr">
+                                    Разработка сайта любой сложности
+                                </div>
+
+                                <a href="#url" class="hero__btn btn flex">
+                                    Подробнее
+                                </a>
+
+                            </div>
+                        </div>
+                        <!--слайд продвижение сайта-->
+                        <div class="slide flex">
+                            <div class="container">
+                                <h2 class="hero__slide__title">
+                                    Продвижение сайта
+                                </h2>
+                                <div class="hero__slide__descr">
+                                    SEO оптимизация, SMM, контекстная реклама
+                                </div>
+                                <a href="#url" class="hero__btn btn flex">
+                                    Подробнее
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--слайд дизайн сайта-->
+
+                        <div class="slide  flex">
+                            <div class="container">
+                                <h2 class="hero__slide__title">
+                                    Дизайн сайта
+                                </h2>
+                                <div class="hero__slide__descr">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque quis obcaecati,
+                                    excepturi
+                                    cupiditate maiores in quae suscipit repellat, magni quibusdam officia error unde
+                                    numquam,
+                                    earum aut laborum. Quibusdam, corrupti architecto.
+                                </div>
+                                <a href="#url" class="hero__btn btn flex">
+                                    Подробнее
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--слайд поддержка сайта-->
+
+                        <div class="slide flex">
+                            <div class="container">
+                                <h2 class="hero__slide__title">
+                                    Поддержка сайта
+                                </h2>
+                                <div class="hero__slide__descr">
+                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cumque quis obcaecati,
+                                    excepturi
+                                    cupiditate maiores in quae suscipit repellat, magni quibusdam officia error unde
+                                    numquam,
+                                    earum aut laborum. Quibusdam, corrupti architecto.
+                                </div>
+
+                                <a href="#url" class="hero__btn btn flex">
+                                    Подробнее
+                                </a>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+        </section>
+
+        <!-- about -->
+
+        <section class="about" id="about">
+            <div class="container">
+                <div class="about__content section__offset">
+                    <h2 class="about__title section__title">
+                        О компании
+                    </h2>
+                    <p class="about__descr">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequuntur, recusandae totam atque
+                        obcaecati nulla dolorum nemo, repellendus enim earum sequi temporibus corporis voluptatem,
+                        corrupti blanditiis consequatur minus vero harum? Explicabo.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam laboriosam dolor enim
+                        perspiciatis in, ab cupiditate earum nobis? Sint reprehenderit natus dolorem quos commodi
+                        voluptatum eius, eaque similique sit vero?
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- services -->
+
+        <section class="services mouse-parallax-bg" id="services">
+            <div class="container">
+                <div class="services__content flex">
+
+                    <h2 class="services__title section__title flex">
+                        Услуги
+                    </h2>
+
+
+                    <ul class="services__list list--reset flex">
+                        <li class="services__item cards flex">
+
+                            <a href="" class="card__link">
+                                <h3 class="card__title">
+                                    Разработка
+                                </h3>
+                            </a>
+                            <p class="card__descr">
+                                Разработаем отличный сайт для Вашей компании, который станет эффективным
+                                инструментом увеличения продаж!
+                            </p>
+
+                        </li>
+
+                        <li class="services__item cards flex">
+
+                            <a href="" class="card__link">
+                                <h3 class="card__title">
+                                    Продвижение
+                                </h3>
+                            </a>
+
+                            <p class="card__descr">
+                                Комплексное продвижение проекта: SEO, SMM, контекстная реклама. Гарантии результата.
+                            </p>
+
+                        </li>
+
+                        <li class="services__item cards flex">
+
+                            <a href="" class="card__link">
+                                <h3 class="card__title">
+                                    Дизайн
+                                </h3>
+                            </a>
+
+                            <p class="card__descr">
+                                Разработаем индивидуальный дизайн сайта, лендинга, презентации или фирменного стиля.
+                                Гарантии результата и 100%
+                                уникальности.
+                            </p>
+
+                        </li>
+
+                        <li class="services__item cards flex">
+
+                            <a href="" class="card__link">
+                                <h3 class="card__title">
+                                    Поддержка
+                                </h3>
+                            </a>
+
+                            <p class="card__descr">
+                                Поддерживаем работоспособность Вашего сайта, обновляем его, защищаем от внешних атак
+                                и
+                                редактируем материалы!
+                            </p>
+
+                        </li>
+                    </ul>
+                    <div class="services__title__container flex">
+
+                        <a href="#price" class="btn  flex services__btn">
+                            Подробнее
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- price -->
+
+        <section class="price" id="price">
+            <!--фон ленты-->
+            <div class="curveWrap">
+                <svg width="100%" height="100%" viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg">
+                    <g class="curve" fill="none">
+                        <path d="M 0, 60 S 300, -60, 600, 60, 800, -120, 1200 60" />
+                        <path d="M 0, 60 S 200, -60, 400, 60, 900, -120, 1200 60" />
+                        <path d="M 0, 60 S 200, -70, 400, 70, 800, -120, 1200 60" />
+                        <path d="M 0, 60 S 200, -60, 400, 80, 600, -120, 1200 60" />
+                    </g>
+                </svg>
+            </div>
+
+            <div class="container">
+                <div class="price__content section__offset">
+                    <h2 class="price__title section__title">
+                        Цены
+                    </h2>
+                    <ul class="price__list list--reset flex">
+
+                        <li class="price__item">
+                            <div class="card__descr__container">
+                                <h3 class="price__item__title card__title">
+                                    Разработка
+                                </h3>
+                                <ul class="price__descr__list list--reset">
+                                    <li class="">Новейшее ПО</li>
+                                    <li class="">Современные технологии</li>
+                                    <li class="">Продуманное usability</li>
+                                    <li class="">Индивидуальный подход</li>
+                                </ul>
+                                <p class="price__item__cost">
+                                    От 100000 руб
+                                </p>
+                            </div>
+                            <a href="" class="price__item__btn btn flex">
+                                Подробнее
+                            </a>
+                        </li>
+
+                        <li class="price__item">
+                            <div class="card__descr__container">
+
+                                <h3 class="price__item__title card__title">
+                                    Продвижение
+                                </h3>
+                                <ul class="price__descr list--reset">
+                                    <li class="">Нацеленность на результат</li>
+                                    <li class="">Квалифицированные специалисты</li>
+                                    <li class="">Проверенные методы</li>
+                                    <li class="">Гарантии</li>
+                                </ul>
+                                <p class="price__item__cost">
+                                    От 100000 руб
+                                </p>
+                            </div>
+                            <a href="" class="price__item__btn btn flex">
+                                Подробнее
+                            </a>
+                        </li>
+                        <li class="price__item">
+                            <div class="card__descr__container">
+
+                                <h3 class="price__item__title card__title">
+                                    Дизайн
+                                </h3>
+                                <ul class="price__descr list--reset">
+                                    <li class="">Креативные идеи</li>
+                                    <li class="">Свежие решения</li>
+                                    <li class="">Только уникальная разработка</li>
+                                    <li class="">Учет всех пожеланий</li>
+                                </ul>
+                                <p class="price__item__cost">
+                                    От 100000 руб
+                                </p>
+                            </div>
+                            <a href="" class="price__item__btn btn flex">
+                                Подробнее
+                            </a>
+                        </li>
+                        <li class="price__item">
+                            <div class="card__descr__container">
+
+                                <h3 class="price__item__title card__title">
+                                    Поддержка
+                                </h3>
+                                <ul class="price__descr list--reset">
+                                    <li class="">Связь 24/7</li>
+                                    <li class="">Личный менеджер</li>
+                                    <li class="">Оформление договора</li>
+                                    <li class="">Прозрачная отчетность</li>
+                                </ul>
+                                <p class="price__item__cost">
+                                    От 100000 руб
+                                </p>
+                            </div>
+                            <a href="" class="price__item__btn btn flex">
+                                Подробнее
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- advantages and stats-->
+
+        <section class="adv">
+            <div class="container">
+                <div class="adv__content section__offset">
+                    <h2 class="section__title adv__title">
+                        Преимущества
+                    </h2>
+
+                    <ul class="adv__list list--reset flex">
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+                            <h3 class="card__title">
+                                Адаптивная верстка
+                            </h3>
+                            <p class="adv__item__descr card__descr">
+                                "Резиновые" сайты для отображения на любых устройствах
+                            </p>
+                        </li>
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+                            <h3 class="card__title">
+                                Современный движок
+                            </h3>
+                            <p class="adv__item__descr">
+                                Надежная CMS для быстрой и устойчивой работы сайта
+                            </p>
+                        </li>
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+
+                            <h3 class="card__title">
+                                Эффективный дизайн
+                            </h3>
+                            <p class="adv__item__descr">
+                                Всегда продуман с точки зрения продаж
+                            </p>
+                        </li>
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+
+                            <h3 class="adv__item__title">
+                                Индивидуальный подход
+                            </h3>
+                            <p class="adv__item__descr">
+                                Каждый клиент для нас особенный
+                            </p>
+                        </li>
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+
+                            <h3 class=" card__title">
+                                Разработка материалов
+                            </h3>
+                            <p class="adv__item__descr">
+                                Обеспечиваем контентную поддержку сайта
+                            </p>
+                        </li>
+
+                        <li class="adv__item iconblock-4">
+                            <div class="icon">
+                                <img src="IMG/png/000.png" alt="sphere">
+                            </div>
+
+                            <h3 class="adv__item__title card__title">
+                                Уникальный функционал
+                            </h3>
+                            <p class="adv__item__descr">
+                                Решаем задачи любого уровня сложности
+                            </p>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- portfolio -->
+
+        <section class="portfolio">
+            <div class="container">
+                <div class="portfolio__content section__offset">
+
+                </div>
+            </div>
+        </section>
+
+        <!-- form -->
+
+        <section class="form">
+            <div class="container">
+                <div class="form__content section__offset">
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="footer">
+        <div class="container">
+            <div class="footer__content">
+                <!-- Footer content goes here -->
+            </div>
+        </div>
+    </footer>
+    <!--бургер-->
+    <script>
+        const burger = document.querySelector('.burger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        // Открытие/закрытие меню
+        burger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            burger.classList.toggle('active');
+            burger.styles('background:none');
+        });
+
+        // Закрытие меню при клике вне области
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-menu') && !e.target.closest('.burger')) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+            }
+        });
+
+        // Закрытие меню при клике на пункт (для якорных ссылок)
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+            });
+        });
+
+        // Закрытие меню при изменении размера окна
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navMenu.classList.remove('active');
+                burger.classList.remove('active');
+            }
+        });
+    </script>
+
+    <script src="JS/particle-wave.js"></script>
+    <!--fractals
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 80,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: '#fff'
+                    },
+                    shape: {
+                        type: 'circle',
+                        stroke: {
+                            width: 1,
+                            color: '#2ba6a6'
+                        }
+                    },
+                    opacity: {
+                        value: 0.5,
+                        random: false
+                    },
+                    size: {
+                        value: 3,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 200,
+                        color: '#bbffff',
+                        opacity: 0.7,
+                        width: 1
+                    },
+                    move: {
+                        enable: true,
+                        speed: 6,
+                        direction: 'none',
+                        random: false,
+                        straight: false,
+                        out_mode: 'out',
+                        bounce: false
+                    }
+                },
+                interactivity: {
+                    detect_on: 'canvas',
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: 'repulse'
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: 'push'
+                        },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+        });
+    </script>
+-->
+
+    <!--паралакс на фон
+    <script>
+        let bg = document.querySelector('.mouse-parallax-bg');
+        window.addEventListener('mousemove', function (e) {
+            let x = e.clientX / window.innerWidth;
+            let y = e.clientY / window.innerHeight;
+            bg.style.transform = 'translate(-' + x * 50 + 'px, -' + y * 50 + 'px)';
+        });
+    </script>
+    -->
+</body>
+
+</html>
